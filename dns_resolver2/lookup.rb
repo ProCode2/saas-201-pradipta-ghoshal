@@ -25,8 +25,9 @@ record = {
 }
 =end
 def parse_dns(raw)
+  # column_data will store the parsed data as arrays
+  # [["A", "example.com", "IPV4"],["CNAME", "example2.com", "IPV4"]]
   column_data = []
-  dns_rec = {}
 
   # removing lines starting with # and empty lines with filter
   lines = raw.filter { |line| line.length > 1 and line[0] != "#" }
@@ -58,6 +59,7 @@ def resolve(dns_records, lookup_chain, domain)
     if domain != lookup_chain.last
       lookup_chain << domain
     end
+    # recursively call resolve with the lead (domain_info[:target])
     resolve(dns_records, lookup_chain, domain_info[:target])
   elsif domain_info[:type] == "A"
     if domain != lookup_chain.last
