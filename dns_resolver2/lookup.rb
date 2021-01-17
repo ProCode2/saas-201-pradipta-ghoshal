@@ -54,6 +54,7 @@ def resolve(dns_records, lookup_chain, domain)
   # if record of this domain does not exist
   if !domain_info
     return ["Error: Record not found for #{domain}"]
+
     # if record does exist
   elsif domain_info[:type] == "CNAME"
     if domain != lookup_chain.last
@@ -61,6 +62,8 @@ def resolve(dns_records, lookup_chain, domain)
     end
     # recursively call resolve with the lead (domain_info[:target])
     resolve(dns_records, lookup_chain, domain_info[:target])
+
+    # got an IP, add it to lookup_chain and return
   elsif domain_info[:type] == "A"
     if domain != lookup_chain.last
       lookup_chain << domain
