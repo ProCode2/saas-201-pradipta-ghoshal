@@ -35,13 +35,13 @@ class Todo < ActiveRecord::Base
     puts "My Todo-list"
     puts "\n"
     puts "Overdue"
-    puts overdue
+    puts overdue   # prints all the todos that are overdue
     puts "\n\n"
     puts "Due Today"
-    puts due_today
+    puts due_today    # prints all the todos that are due today
     puts "\n\n"
     puts "Due Later"
-    puts due_later
+    puts due_later    # prints all the todos that are due later
   end
 
   # add a todo to the :todos table
